@@ -1,4 +1,7 @@
 # Congressional Votes
+<p align="center">
+  <img src="images/congress.jpg">
+</p>
 <h4>CURRENTLY WORKING ON ANALYSIS AND CODE: UPDATED DAILY</h4>
 
 ## Table of Contents
