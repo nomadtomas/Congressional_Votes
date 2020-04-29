@@ -9,7 +9,6 @@ class SenateVotes(object):
         self.base_url = 'https://www.senate.gov'
         self.ext = '/legislative/votes_new.htm'
         self.alt_ext = None
-        self.failed_links = []
         self.session = None
         
     def soup(self, extension, parser='html.parser'):
@@ -80,8 +79,6 @@ class SenateVotes(object):
         '''
         Generates a dataframe of how senators voted on a particular issue
         '''
-        votes = []
-        
         try:
             soup = self.soup(ext)
             link = soup.find(class_='newspaperDisplay_3column')
@@ -110,14 +107,10 @@ class SenateVotes(object):
             data['measure_number'] = measure_number
             data['measure_title'] = measure_title
 
-            votes.append(data)
+            return data
 
         except:
             print("Failed extension: {}".format(self.base_url + ext))
-            self.failed_links.append(self.base_url + ext)
-                
-        df = pd.concat(votes)
-        return df
 
     def votes_by_issue(self, issue):
         '''
@@ -133,15 +126,10 @@ class SenateVotes(object):
         A dataframe with of all senators and vote information of filtered issue  
         '''
         df = self.current_votes_df()
-        data = df[df['Issue']==str(issue)]
-        lst = data['extension'].to_list()
+        data = df[df['Issue'] == str(issue)]
+        data = data.sort_values(by='vote_num', ascending=False)
+        lst = data['extension'].to_list()[0]
         
-        dt = []
-
-        for x in lst:
-            data = self.vote_summary_df(x)
-            data['vote_attempts'] = len(lst)
-            dt.append(data)
-        
-        df = pd.concat(dt)
+        df = self.vote_summary_df(lst)
+        df['vote_attempts'] = len(data)
         return df
