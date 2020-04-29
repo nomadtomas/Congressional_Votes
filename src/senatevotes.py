@@ -10,6 +10,7 @@ class SenateVotes(object):
         self.ext = '/legislative/votes_new.htm'
         self.alt_ext = None
         self.session = None
+        self.curr_ext = True
         
     def soup(self, extension, parser='html.parser'):
         '''
@@ -22,19 +23,19 @@ class SenateVotes(object):
         '''
         Gets current congressional session's extension
         '''
-        soup = self.soup(self.ext)
-        return soup.select('p')[0].a['href']
+        if self.curr_ext == True:
+            soup = self.soup(self.ext)
+            return soup.select('p')[0].a['href']
+        else:
+            return self.alt_ext
+
         
     def current_votes_soup(self):
         '''
         Runs soup function to parse data 
         '''
         try:
-            if self.alt_ext == None:
-                ext = self.current_votes_ext()
-            else:
-                ext = self.alt_ext
-
+            ext = self.current_votes_ext()
             current_soup = self.soup(ext)
             return current_soup
             
@@ -64,9 +65,12 @@ class SenateVotes(object):
         Generates a dataframe of all roll call votes of session provided 
         '''
         if alt_ext != None:
+            self.curr_ext = False
             self.alt_ext = alt_ext
-
-        extensions = self.current_votes_extensions()
+            extensions = self.current_votes_extensions()
+        else:
+            extensions = self.current_votes_extensions()
+            
         df = pd.concat(pd.read_html(self.base_url + self.current_votes_ext()))
         df['session'] = self.session
         df['vote_num'] = df['Vote (Tally)'].apply(lambda x: x.split('(')[0].strip())
