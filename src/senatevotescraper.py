@@ -13,7 +13,6 @@ class SenateVotes(object):
         self.alt_ext = None
         self.session = None
         self.curr_ext = True
-        self.failed_links = []
 
     def mongo(self):
         '''
