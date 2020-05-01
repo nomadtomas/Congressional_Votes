@@ -3,6 +3,21 @@
   <img src="images/congress.jpg">
 </p>
 <h4>CURRENTLY WORKING ON ANALYSIS AND CODE: UPDATED DAILY</h4>
+<div id="myDIV" class="header">
+  <h2>Work Progress List</h2>
+  <input type="text" id="myInput" placeholder="Title...">
+  <span onclick="newElement()" class="addBtn">Add</span>
+</div>
+
+<ul id="myUL">
+  <li class="checked">Create Senate Web-scraper</li>
+  <li>Create Transformer for Senate data</li>
+  <li>Develope House Web-scraper</li>
+  <li>Create Transformer for House data</li>
+  <li>Develop PostgresSQL database for clean data</li>
+  <li>Create Tableau Dashboad</li>
+  <li>Create simple app for user interaction</li>
+</ul>
 
 ## Table of Contents
 
