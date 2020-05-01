@@ -6,7 +6,7 @@
 
 <h2>Work Progress List</h2>
 <ul id="myUL">
-  <li class="checked">Create Senate Web-scraper</li>
+  <li><strike>Create Senate Web-scraper</strike></li>
   <li>Create Transformer for Senate data</li>
   <li>Develope House Web-scraper</li>
   <li>Create Transformer for House data</li>
