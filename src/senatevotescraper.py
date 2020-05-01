@@ -21,7 +21,7 @@ class SenateVotes(object):
         client = pymongo.MongoClient()
         # db name will be `congress` unless changed here to something else
         db = client.congress
-        #table name will be `senate` unless changed here to something else
+        # table name will be `senate` unless changed here to something else
         pages = db.senate
         return pages
         
@@ -91,22 +91,31 @@ class SenateVotes(object):
         df['extension'] = extensions
         return df
 
-    def scrape_page(self, load_to_mongo=False):
+    def scrape_page(self, link, load_to_mongo=False):
         '''
         Scrapes senator vote data from the assinged current_votes_df 
         and loads it into a mogno database if load_to_mongo is equal to True
+
+        Parameters:
+        -----------
+        link : str
+            Web extension of session to be used ex: '/legislative/LIS/roll_call_lists/vote_menu_116_2.htm'
+        
+        Returns:
+        --------
+        Loads scraped data to a mongo database, and prints out what session it completed after loading
         '''
+        try: 
+            if load_to_mongo ==True:
+                df = self.current_votes_df(link)
+                lst = df['extension'].to_list()
 
-        if load_to_mongo ==True:
-            df = self.current_votes_df()
-            lst = df['extension'].to_list()
-
-            for ext in lst:
-                response = requests.get(self.base_url + ext)
-                pages = self.mongo()
-                pages.insert_one({'html': response.content, 'time_scraped': time.ctime()}) 
-            
-            return print("Finished Scraping: {}".format(self.session))
-        else:
-            return print("If you would like to load to a mongo database, set load_to_mongo to True")
+                for ext in lst:
+                    response = requests.get(self.base_url + ext)
+                    pages = self.mongo()
+                    pages.insert_one({'html': response.content, 'time_scraped': time.ctime()}) 
+                
+                return print("Finished Scraping: {}".format(self.session))
+        except:
+            print("If you would like to load to a mongo database, set load_to_mongo to True")
  
