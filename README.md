@@ -3,12 +3,8 @@
   <img src="images/congress.jpg">
 </p>
 <h4>CURRENTLY WORKING ON ANALYSIS AND CODE: UPDATED DAILY</h4>
-<div id="myDIV" class="header">
-  <h2>Work Progress List</h2>
-  <input type="text" id="myInput" placeholder="Title...">
-  <span onclick="newElement()" class="addBtn">Add</span>
-</div>
 
+<h2>Work Progress List</h2>
 <ul id="myUL">
   <li class="checked">Create Senate Web-scraper</li>
   <li>Create Transformer for Senate data</li>
