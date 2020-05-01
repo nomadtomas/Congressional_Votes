@@ -11,7 +11,7 @@
   <li>Develope House Web-scraper</li>
   <li>Create Transformer for House data</li>
   <li>Develop PostgresSQL database for clean data</li>
-  <li>Create Tableau Dashboad</li>
+  <li>Create Tableau Dashboard</li>
   <li>Create simple app for user interaction</li>
 </ul>
 
