@@ -7,7 +7,7 @@
 <h2>Work Progress List</h2>
 <ul id="myUL">
   <li><strike>Create Senate Web-scraper</strike></li>
-  <li>Create Transformer for Senate data</li>
+  <li><strong>Create Transformer for Senate data</strong></li>
   <li>Develope House Web-scraper</li>
   <li>Create Transformer for House data</li>
   <li>Develop PostgresSQL database for clean data</li>
