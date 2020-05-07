@@ -21,7 +21,7 @@ class SenateScrape(object):
         client = pymongo.MongoClient()
         # db name will be `congress` unless changed here to something else
         db = client.congress
-        # table name will be `senate` unless changed here to something else
+        # table name will be `senate_sessions` unless changed here to something else
         pages = db.senate_sessions
         return pages
 
