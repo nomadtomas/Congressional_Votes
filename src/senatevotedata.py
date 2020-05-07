@@ -4,6 +4,7 @@ import pymongo
 import random
 import time
 import re
+from IPython.display import clear_output
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
@@ -65,12 +66,18 @@ class GetVoteData(object):
             driver = webdriver.Chrome(options=options)
             
         driver.implicitly_wait(60)
+
+        count = 0
         # runs through all vote extensions on year provided
         for ext in extensions:
+
+            clear_output(wait=True)
             driver.get(self.url + ext) 
             ps = driver.page_source
             collection.insert_one({'html': ps, 'time_scraped': time.ctime(), 'ext':ext})   
             time.sleep(random.randrange(3,10)) # added to simulate human interaction, prevents response failures.
-            
+            count += 1
+            print("Current Progress: ", np.round(count/len(extensions) * 100, 2), "%")
+
         driver.close()
         return print("{} votes have been added to {}".format(year, collection))
