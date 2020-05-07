@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.options import Options
 
 class SenateScrape(object):
     
-    def __init__(self, headless=False):
+    def __init__(self, headless=True):
         self.headless = headless
         self.url = 'https://www.senate.gov'
 
@@ -37,8 +37,9 @@ class SenateScrape(object):
             Example ext: '/legislative/LIS/roll_call_lists/vote_menu_116_1.htm'
         
         load_to_mongo : bool (optional)
-            By default will be False
-            Will load data to a mongodb assigned by the mongo_senate_sessions function if True 
+            By default will be True
+            Will return a pandas dataframe and load data to a mongodb assigned by the mongo_senate_sessions function if True
+            Will only create a pandas dataframe of data if False 
         
         Returns:
         --------
